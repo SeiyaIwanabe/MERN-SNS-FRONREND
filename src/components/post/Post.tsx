@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useState } from 'react';
 import './Post.scss';
 import { MoreVert } from '@mui/icons-material';
 import { Users } from '../../dammyData';
@@ -16,6 +16,15 @@ interface Props {
 }
 
 export const Post: FC<Props> = ({ post }) => {
+    // いいねのstate
+    const [like, setLike] = useState(post.like);
+    const [isLiked, setIsLiked] = useState(false);
+
+    const handleLike = () => {
+        setLike(isLiked ? like - 1 : like + 1);
+        setIsLiked(!isLiked);
+    };
+
     return (
         <div className="post">
             <div className="postWrapper">
@@ -51,9 +60,10 @@ export const Post: FC<Props> = ({ post }) => {
                             src="/assets/sun-flower.jpg"
                             alt=""
                             className="likeIcon"
+                            onClick={() => handleLike()}
                         />
                         <span className="postLikeCounter">
-                            {post.like}がいいねしました
+                            {like}がいいねしました
                         </span>
                     </div>
                     <div className="postBottomRight">
