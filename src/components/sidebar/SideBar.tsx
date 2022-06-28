@@ -1,4 +1,6 @@
 import React from 'react';
+import { CloseFriend } from '../closefriend/CloseFriend';
+import { Users } from '../../dammyData';
 import './SideBar.scss';
 import {
     Bookmark,
@@ -50,30 +52,9 @@ export const SideBar = () => {
                 </ul>
                 <hr className="sidebarHr" />
                 <ul className="sidebarFriendList">
-                    <li className="sidebarFriend">
-                        <img
-                            src="/assets/sun-flower.jpg"
-                            alt=""
-                            className="sidebarFriendImg"
-                        />
-                        <span className="sidebarFriendName">seiya</span>
-                    </li>
-                    <li className="sidebarFriend">
-                        <img
-                            src="/assets/sun-flower.jpg"
-                            alt=""
-                            className="sidebarFriendImg"
-                        />
-                        <span className="sidebarFriendName">seiya</span>
-                    </li>
-                    <li className="sidebarFriend">
-                        <img
-                            src="/assets/sun-flower.jpg"
-                            alt=""
-                            className="sidebarFriendImg"
-                        />
-                        <span className="sidebarFriendName">seiya</span>
-                    </li>
+                    {Users.map((user) => (
+                        <CloseFriend user={user} key={user.id} />
+                    ))}
                 </ul>
             </div>
         </div>
