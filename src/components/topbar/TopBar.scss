@@ -1,0 +1,86 @@
+.topbarContaiber {
+    background: teal;
+    height: 50px;
+    width: 100%;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+
+    .topbarLeft {
+        flex: 3;
+
+        .chakra-text {
+            display: inline-block;
+            font-weight: bolder;
+            font-size: 24px;
+            margin-left: 20px;
+        }
+    }
+
+    .topbarCenter {
+        flex: 5;
+
+        .searchBar {
+            width: 100%;
+            height: 30px;
+            background: #ffffff;
+            border-radius: 25px;
+            display: flex;
+            align-items: center;
+
+            .searchIcon {
+                font-size: 20px !important;
+                margin: 0 5px 0 10px;
+            }
+            .searchInput {
+                border: none;
+                width: 80%;
+                &:focus {
+                    outline: none;
+                }
+            }
+        }
+    }
+
+    .topbarRight {
+        flex: 4;
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        color: #ffffff;
+
+        .topbarItemIcons {
+            display: flex;
+
+            .topbarIconItem {
+                margin-right: 15px;
+                cursor: pointer;
+                position: relative;
+                margin-top: 5px;
+
+                .topbarIconBadge {
+                    position: absolute;
+                    top: -5px;
+                    right: -5px;
+                    background: red;
+                    width: 15px;
+                    height: 15px;
+                    border-radius: 50%;
+                    font-size: 12px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                }
+            }
+            .topbarImg {
+                width: 32px;
+                height: 32px;
+                border-radius: 50%;
+                cursor: pointer;
+                object-fit: cover;
+            }
+        }
+    }
+}
