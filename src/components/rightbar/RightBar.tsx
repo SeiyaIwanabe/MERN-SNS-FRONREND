@@ -1,12 +1,17 @@
-import React from 'react';
-import './RightBar.scss';
+import React, { FC } from 'react';
 import { Online } from '../online/Online';
 import { Users } from '../../dammyData';
+import './RightBar.scss';
 
-export const RightBar = () => {
-    return (
-        <div className="rightbar">
-            <div className="rightbarWrapper">
+interface Props {
+    profile?: boolean;
+}
+
+export const RightBar: FC<Props> = ({ profile }) => {
+    // Home画面でのRightBar
+    const HomeRightBar = () => {
+        return (
+            <>
                 <div className="eventContainer">
                     <img
                         src="/assets/sun-flower.jpg"
@@ -43,6 +48,72 @@ export const RightBar = () => {
                     className="rightbarPromotionImg"
                 />
                 <p className="promotionName">アナゴ株式会社</p>
+            </>
+        );
+    };
+
+    // Profile画面でのRightBar
+    const ProfileRightBar = () => {
+        return (
+            <>
+                <h4 className="rightbarTitle">ユーザー情報</h4>
+                <div className="rightbarInfo">
+                    <div className="rightbarInfoItem">
+                        <span className="rightbarInfoKey">出身:</span>
+                        <span className="rightbarInfoKey">福岡</span>
+                    </div>
+                    <h4 className="rightbarTitle">あなたの友達</h4>
+                    <div className="rightbarFollowings">
+                        <div className="rightbarFollowing">
+                            <img
+                                src="/assets/sun-flower.jpg"
+                                alt=""
+                                className="rightbarFollowingImg"
+                            />
+                            <span className="rightbarFollowingName">seiya</span>
+                        </div>
+                        <div className="rightbarFollowing">
+                            <img
+                                src="/assets/sun-flower.jpg"
+                                alt=""
+                                className="rightbarFollowingImg"
+                            />
+                            <span className="rightbarFollowingName">seiya</span>
+                        </div>
+                        <div className="rightbarFollowing">
+                            <img
+                                src="/assets/sun-flower.jpg"
+                                alt=""
+                                className="rightbarFollowingImg"
+                            />
+                            <span className="rightbarFollowingName">seiya</span>
+                        </div>
+                        <div className="rightbarFollowing">
+                            <img
+                                src="/assets/sun-flower.jpg"
+                                alt=""
+                                className="rightbarFollowingImg"
+                            />
+                            <span className="rightbarFollowingName">seiya</span>
+                        </div>
+                        <div className="rightbarFollowing">
+                            <img
+                                src="/assets/sun-flower.jpg"
+                                alt=""
+                                className="rightbarFollowingImg"
+                            />
+                            <span className="rightbarFollowingName">seiya</span>
+                        </div>
+                    </div>
+                </div>
+            </>
+        );
+    };
+
+    return (
+        <div className="rightbar">
+            <div className="rightbarWrapper">
+                {profile ? <ProfileRightBar /> : <HomeRightBar />}
             </div>
         </div>
     );
