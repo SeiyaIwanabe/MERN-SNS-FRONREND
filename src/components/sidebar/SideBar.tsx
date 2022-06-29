@@ -11,6 +11,7 @@ import {
     Search,
     Settings,
 } from '@mui/icons-material';
+import { Link } from 'react-router-dom';
 
 export const SideBar = () => {
     return (
@@ -19,7 +20,9 @@ export const SideBar = () => {
                 <ul className="sidebarList">
                     <li className="sidebarListItem">
                         <Home className="sidebarIcon" />
-                        <span className="sidebarListItemText">Home</span>
+                        <Link to="/">
+                            <span className="sidebarListItemText">Home</span>
+                        </Link>
                     </li>
                     <li className="sidebarListItem">
                         <Search className="sidebarIcon" />
@@ -43,7 +46,9 @@ export const SideBar = () => {
                     </li>
                     <li className="sidebarListItem">
                         <Person className="sidebarIcon" />
-                        <span className="sidebarListItemText">Profile</span>
+                        <Link to="/profile/seiya">
+                            <span className="sidebarListItemText">Profile</span>
+                        </Link>
                     </li>
                     <li className="sidebarListItem">
                         <Settings className="sidebarIcon" />

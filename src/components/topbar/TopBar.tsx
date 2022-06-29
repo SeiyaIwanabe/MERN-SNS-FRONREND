@@ -2,14 +2,17 @@ import React from 'react';
 import { Text } from '@chakra-ui/react';
 import { Chat, Notifications, Search } from '@mui/icons-material';
 import './TopBar.scss';
+import { Link } from 'react-router-dom';
 
 export const TopBar = () => {
     return (
         <div className="topbarContaiber">
             <div className="topbarLeft">
-                <Text fontSize="lg" color="tomato">
-                    MERN-SNS
-                </Text>
+                <Link to="/">
+                    <Text fontSize="lg" color="tomato">
+                        MERN-SNS
+                    </Text>
+                </Link>
             </div>
             <div className="topbarCenter">
                 <div className="searchBar">
