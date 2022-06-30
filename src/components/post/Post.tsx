@@ -3,6 +3,7 @@ import { MoreVert } from '@mui/icons-material';
 import { MongoUserType } from '../../Type';
 import { MongoPostType } from '../../Type';
 import axios from 'axios';
+import { format } from 'timeago.js'; // TODO: 謎のエラーが吐かれる
 import './Post.scss';
 // import { Users } from '../../dammyData';
 
@@ -57,7 +58,9 @@ export const Post: FC<Props> = ({ post }) => {
                             className="postProfileImg"
                         />
                         <span className="postUserName">{user.username}</span>
-                        {/* <span className="postDate">{post.createdAt}</span> */}
+                        <span className="postDate">
+                            {format(post.createdAt)}
+                        </span>
                     </div>
                     <div className="postTopRight">
                         <MoreVert />
