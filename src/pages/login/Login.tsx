@@ -13,14 +13,17 @@ export const Login = () => {
                     <div className="loginBox">
                         <p className="loginMsg">ログインはこちら</p>
                         <input
-                            type="text"
+                            type="email"
                             className="loginInput"
                             placeholder="Eメール"
+                            required
                         />
                         <input
-                            type="text"
+                            type="password"
                             className="loginInput"
                             placeholder="パスワード"
+                            required
+                            minLength={6}
                         />
                         <button className="loginButton">ログイン</button>
                         <span className="loginForgot">
