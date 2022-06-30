@@ -7,7 +7,7 @@ import './Profile.scss';
 
 export const Profile = () => {
     // TODO: .envの設定
-    // const PUBLICK_FOLDER = process.env.PUBLIC_URL;
+    // const PUBLICK_FOLDER = process.env.REACT_APP_PUBLIC_FOLDER;
     return (
         <>
             <TopBar />

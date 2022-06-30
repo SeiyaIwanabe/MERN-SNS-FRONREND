@@ -1,13 +1,15 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import './Post.scss';
 import { MoreVert } from '@mui/icons-material';
-import { Users } from '../../dammyData';
+import { MongoUserType } from '../../Type';
+import axios from 'axios';
+// import { Users } from '../../dammyData';
 
 interface Props {
     post: {
         id: number;
-        desc: string;
-        photo: string;
+        description: string;
+        img: string;
         date: string;
         userId: number;
         like: number;
@@ -20,6 +22,33 @@ export const Post: FC<Props> = ({ post }) => {
     const [like, setLike] = useState(post.like);
     const [isLiked, setIsLiked] = useState(false);
 
+    // ユーザーのstate
+    const [user, setUser] = useState<MongoUserType>({
+        _id: '',
+        username: '',
+        email: '',
+        password: '',
+        profilePicture: '',
+        coverPicture: '',
+        folllowes: [],
+        folllowings: [],
+        isAdmin: false,
+        createdAt: null,
+        updatedAt: null,
+        __v: null,
+    });
+
+    // ページ読み込み時に投稿データを取得
+    useEffect(() => {
+        // useEffectの中ではasyncは使えないので別途で関数を用意する
+        const fetchUser = async () => {
+            const response = await axios.get(`/users/${post.userId}`);
+            console.log(response.data);
+            setUser(response.data);
+        };
+        fetchUser();
+    }, []);
+
     const handleLike = () => {
         setLike(isLiked ? like - 1 : like + 1);
         setIsLiked(!isLiked);
@@ -31,19 +60,11 @@ export const Post: FC<Props> = ({ post }) => {
                 <div className="postTop">
                     <div className="postTopLeft">
                         <img
-                            src={
-                                Users.filter((user) => user.id === post.id)[0]
-                                    .profilePicture
-                            }
+                            src={user.profilePicture || '/assets/noAvatar.png'}
                             alt=""
                             className="postProfileImg"
                         />
-                        <span className="postUserName">
-                            {
-                                Users.filter((user) => user.id === post.id)[0]
-                                    .username
-                            }
-                        </span>
+                        <span className="postUserName">{user.username}</span>
                         <span className="postDate">{post.date}</span>
                     </div>
                     <div className="postTopRight">
@@ -51,8 +72,8 @@ export const Post: FC<Props> = ({ post }) => {
                     </div>
                 </div>
                 <div className="postCenter">
-                    <span className="postText">{post.desc}</span>
-                    <img src={post.photo} alt="" className="postImg" />
+                    <span className="postText">{post.description}</span>
+                    <img src={post.img} alt="" className="postImg" />
                 </div>
                 <div className="postBottom">
                     <div className="postBottomLeft">
@@ -63,7 +84,7 @@ export const Post: FC<Props> = ({ post }) => {
                             onClick={() => handleLike()}
                         />
                         <span className="postLikeCounter">
-                            {like}がいいねしました
+                            {like}人がいいねしました
                         </span>
                     </div>
                     <div className="postBottomRight">

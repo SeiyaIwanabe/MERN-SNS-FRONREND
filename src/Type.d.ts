@@ -13,3 +13,18 @@ export interface PostType {
     like: number;
     comment: number;
 }
+
+export interface MongoUserType {
+    _id: string;
+    username: string;
+    email: string;
+    password: string;
+    profilePicture?: string;
+    coverPicture?: string;
+    folllowes: string[];
+    folllowings: string[];
+    isAdmin: boolean;
+    createdAt: Date | null;
+    updatedAt: Date | null;
+    __v: number | null;
+}
