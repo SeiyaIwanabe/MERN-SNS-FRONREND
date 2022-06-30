@@ -1,25 +1,18 @@
 import React, { FC, useEffect, useState } from 'react';
-import './Post.scss';
 import { MoreVert } from '@mui/icons-material';
 import { MongoUserType } from '../../Type';
+import { MongoPostType } from '../../Type';
 import axios from 'axios';
+import './Post.scss';
 // import { Users } from '../../dammyData';
 
 interface Props {
-    post: {
-        id: number;
-        description: string;
-        img: string;
-        date: string;
-        userId: number;
-        like: number;
-        comment: number;
-    };
+    post: MongoPostType;
 }
 
 export const Post: FC<Props> = ({ post }) => {
     // いいねのstate
-    const [like, setLike] = useState(post.like);
+    const [likes, setLikes] = useState(post.likes.length);
     const [isLiked, setIsLiked] = useState(false);
 
     // ユーザーのstate
@@ -43,14 +36,13 @@ export const Post: FC<Props> = ({ post }) => {
         // useEffectの中ではasyncは使えないので別途で関数を用意する
         const fetchUser = async () => {
             const response = await axios.get(`/users/${post.userId}`);
-            console.log(response.data);
             setUser(response.data);
         };
         fetchUser();
-    }, []);
+    }, [post.userId]);
 
     const handleLike = () => {
-        setLike(isLiked ? like - 1 : like + 1);
+        setLikes(isLiked ? likes - 1 : likes + 1);
         setIsLiked(!isLiked);
     };
 
@@ -65,7 +57,7 @@ export const Post: FC<Props> = ({ post }) => {
                             className="postProfileImg"
                         />
                         <span className="postUserName">{user.username}</span>
-                        <span className="postDate">{post.date}</span>
+                        {/* <span className="postDate">{post.createdAt}</span> */}
                     </div>
                     <div className="postTopRight">
                         <MoreVert />
@@ -84,13 +76,13 @@ export const Post: FC<Props> = ({ post }) => {
                             onClick={() => handleLike()}
                         />
                         <span className="postLikeCounter">
-                            {like}人がいいねしました
+                            {likes}人がいいねしました
                         </span>
                     </div>
                     <div className="postBottomRight">
-                        <span className="postCommentText">
+                        {/* <span className="postCommentText">
                             {post.comment}:コメント
-                        </span>
+                        </span> */}
                     </div>
                 </div>
             </div>

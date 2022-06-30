@@ -1,12 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import './TimeLine.scss';
 import { Post } from '../post/Post';
+import { MongoPostType } from '../../Type';
 import { Share } from '../share/Share';
 import axios from 'axios';
 // import { Posts } from '../../dammyData';
 
-export const TimeLine = () => {
-    const [posts, setPosts] = useState([]);
+export const TimeLine: FC = () => {
+    const [posts, setPosts] = useState<MongoPostType[]>([]);
 
     // ページ読み込み時に投稿データを取得
     useEffect(() => {
@@ -15,7 +16,6 @@ export const TimeLine = () => {
             const response = await axios.get(
                 '/posts/timeline/62b9254bf0dfe57fcf7bd0ae'
             );
-            console.log(response.data);
             setPosts(response.data);
         };
         fetchPosts();
@@ -26,7 +26,7 @@ export const TimeLine = () => {
             <div className="timelineWrapper">
                 <Share />
                 {posts.map((post) => (
-                    <Post post={post} />
+                    <Post post={post} key={post._id} />
                 ))}
             </div>
         </div>

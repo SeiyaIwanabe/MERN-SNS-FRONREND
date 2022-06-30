@@ -14,6 +14,17 @@ export interface PostType {
     comment: number;
 }
 
+export interface MongoPostType {
+    _id: string;
+    userId: string;
+    description: string;
+    img?: string;
+    likes: string[];
+    createdAt: Date;
+    updatedAt: Date;
+    _v: number;
+}
+
 export interface MongoUserType {
     _id: string;
     username: string;
