@@ -1,13 +1,14 @@
 import React, { FC } from 'react';
 import { Online } from '../online/Online';
 import { Users } from '../../dammyData';
+import { MongoUserType } from '../../Type';
 import './RightBar.scss';
 
 interface Props {
-    profile?: boolean;
+    user?: MongoUserType;
 }
 
-export const RightBar: FC<Props> = ({ profile }) => {
+export const RightBar: FC<Props> = ({ user }) => {
     // Home画面でのRightBar
     const HomeRightBar = () => {
         return (
@@ -113,7 +114,7 @@ export const RightBar: FC<Props> = ({ profile }) => {
     return (
         <div className="rightbar">
             <div className="rightbarWrapper">
-                {profile ? <ProfileRightBar /> : <HomeRightBar />}
+                {user ? <ProfileRightBar /> : <HomeRightBar />}
             </div>
         </div>
     );

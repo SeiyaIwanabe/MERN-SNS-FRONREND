@@ -28,6 +28,7 @@ export interface MongoPostType {
 export interface MongoUserType {
     _id: string;
     username: string;
+    description: string;
     email: string;
     password: string;
     profilePicture?: string;

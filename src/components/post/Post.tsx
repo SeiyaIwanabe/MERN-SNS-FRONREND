@@ -20,6 +20,7 @@ export const Post: FC<Props> = ({ post }) => {
     const [user, setUser] = useState<MongoUserType>({
         _id: '',
         username: '',
+        description: '',
         email: '',
         password: '',
         profilePicture: '',
