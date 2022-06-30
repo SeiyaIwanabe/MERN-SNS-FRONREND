@@ -5,6 +5,7 @@ import { MongoPostType } from '../../Type';
 import axios from 'axios';
 import { format } from 'timeago.js'; // TODO: 謎のエラーが吐かれる
 import './Post.scss';
+import { Link } from 'react-router-dom';
 // import { Users } from '../../dammyData';
 
 interface Props {
@@ -37,7 +38,7 @@ export const Post: FC<Props> = ({ post }) => {
     useEffect(() => {
         // useEffectの中ではasyncは使えないので別途で関数を用意する
         const fetchUser = async () => {
-            const response = await axios.get(`/users/${post.userId}`);
+            const response = await axios.get(`/users?userId=${post.userId}`);
             setUser(response.data);
         };
         fetchUser();
@@ -53,11 +54,16 @@ export const Post: FC<Props> = ({ post }) => {
             <div className="postWrapper">
                 <div className="postTop">
                     <div className="postTopLeft">
-                        <img
-                            src={user.profilePicture || '/assets/noAvatar.png'}
-                            alt=""
-                            className="postProfileImg"
-                        />
+                        <Link to={`/profile/${user.username}`}>
+                            <img
+                                src={
+                                    user.profilePicture ||
+                                    '/assets/noAvatar.png'
+                                }
+                                alt=""
+                                className="postProfileImg"
+                            />
+                        </Link>
                         <span className="postUserName">{user.username}</span>
                         <span className="postDate">
                             {format(post.createdAt)}

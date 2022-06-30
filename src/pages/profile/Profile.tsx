@@ -3,9 +3,10 @@ import { SideBar } from '../../components/sidebar/SideBar';
 import { TopBar } from '../../components/topbar/TopBar';
 import { TimeLine } from '../../components/timeline/TimeLine';
 import { RightBar } from '../../components/rightbar/RightBar';
-import './Profile.scss';
 import { MongoUserType } from '../../Type';
 import axios from 'axios';
+import { useParams } from 'react-router-dom';
+import './Profile.scss';
 
 export const Profile = () => {
     // TODO: .envの設定
@@ -28,15 +29,19 @@ export const Profile = () => {
         __v: null,
     });
 
+    // useParamsでusernameのクエリを取得する
+    const username = useParams().username;
+    console.log(username);
+
     // ページ読み込み時に投稿データを取得
     useEffect(() => {
         // useEffectの中ではasyncは使えないので別途で関数を用意する
         const fetchUser = async () => {
-            const response = await axios.get(`/users?username=Iwanabe`);
+            const response = await axios.get(`/users?username=${username}`);
             setUser(response.data);
         };
         fetchUser();
-    }, []);
+    }, [username]);
 
     return (
         <>
@@ -52,7 +57,10 @@ export const Profile = () => {
                                 className="profileCoverImg"
                             />
                             <img
-                                src="/assets/sun-flower.jpg"
+                                src={
+                                    user.profilePicture ||
+                                    '/assets/noAvatar.png'
+                                }
                                 alt=""
                                 className="profileUserImg"
                             />
@@ -65,7 +73,7 @@ export const Profile = () => {
                         </div>
                     </div>
                     <div className="profileRightBottom">
-                        <TimeLine username="Iwanabe" />
+                        <TimeLine username={username} />
                         <RightBar user={user} />
                     </div>
                 </div>
